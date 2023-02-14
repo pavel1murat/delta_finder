@@ -1,0 +1,9 @@
+*~
+.sconsign.dblite
+*.so
+*.d
+*dict_rdict.pcm
+*#*
+scripts/__pycache__/
+results
+RCS

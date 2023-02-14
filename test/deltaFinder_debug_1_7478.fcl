@@ -1,0 +1,13 @@
+# -*- mode:tcl -*-
+# variables which need defaults:
+# -----------------------------
+# :DEFAULT: TRIGGER_PATH=p6
+#------------------------------------------------------------------------------
+BEGIN_PROLOG
+  INPUT_MODULE  @protect_ignore: RootInput        # choices: EmptyEvent / RootInput
+  TRIGGER_PATH  @protect_ignore: [ p3       ]     # defined below
+END_PROLOG
+
+#include "subprojects/delta_finder/deltaFinder_debug_base.fcl"
+
+physics.producers.ComboHitFilter.simID             : 7478
