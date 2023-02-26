@@ -10,6 +10,18 @@ BEGIN_PROLOG
 END_PROLOG
 
 #include "delta_finder/test/deltaFinder_debug_base.fcl"
+source.maxEvents  : 1
+source.firstEvent : 7
+
+
+physics.producers.DeltaFinder.finderParameters.flagProtonHits  : 1
+
+physics.producers.DeltaFinder.diagPlugin.printMcProtons        : 1
+physics.producers.DeltaFinder.diagPlugin.printProtonHits       : 1
+physics.producers.DeltaFinder.diagPlugin.printProtonSeeds      : 1
+physics.producers.DeltaFinder.diagPlugin.printProtonCandidates : 1
 
 # physics.producers.DeltaFinder.testOrder : 1
-physics.analyzers.DeltaFinderAna.printSingleComboHits : 1
+physics.analyzers.DeltaFinderAna.printSingleComboHits          : 1
+
+

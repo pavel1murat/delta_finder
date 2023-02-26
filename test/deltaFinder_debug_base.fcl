@@ -22,14 +22,14 @@ physics : {
             printErrors                   : 1
             chCollTag                     : @local::CH_COLL_TAG
 
-            finderParameters : { @table::CalPatRec.producers.DeltaFinder.finderParameters 
-            }
+            finderParameters : { @table::CalPatRec.producers.DeltaFinder.finderParameters }
 
             diagPlugin : { @table::CalPatRec.producers.DeltaFinder.diagPlugin
                 printDeltaSeeds           : 1
                 printDeltaCandidates      : 1
 
                 mcDiag                    : true
+
                 printComboHits            : 1 ## 0 ##
                 printElectrons            : 1 ## 0 ##
                 printElectronsHits        : 1 ## 1 ##
@@ -69,10 +69,10 @@ source.maxEvents   :    1
 source.fileNames   : [ "/mu2e/data2/users/murat/datasets/mdc2020/CeEndpointMix2BBSignal/dig.mu2e.CeEndpointMix2BBSignal.MDC2020r_perfect_v1_0.001210_00000000.art" ]
 
 physics.producers.makePH.StrawHitSelectionBits     : [ "TimeSelection" ] ## take out "EnergySelection"
-physics.producers.makePH.MaxDS                     : 4
+physics.producers.makePH.MaxDS                     : 5
 physics.producers.makePH.CheckWres                 : true
-physics.producers.makePH.MinimumRadius             : 370.
-physics.producers.makePH.MaximumRadius             : 680.
+# physics.producers.makePH.MinimumRadius             : 370.
+# physics.producers.makePH.MaximumRadius             : 680.
 #------------------------------------------------------------------------------
 # uncomment to write the DST out
 #------------------------------------------------------------------------------

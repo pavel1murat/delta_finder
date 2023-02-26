@@ -1,0 +1,91 @@
+# -*- mode:tcl -*-
+# variables which need defaults:
+# -----------------------------
+BEGIN_PROLOG
+  INPUT_MODULE  @protect_ignore: RootInput        # choices: EmptyEvent / RootInput
+  TRIGGER_PATH  @protect_ignore: [ p1       ]     # p1: all particles, p3: select particle
+END_PROLOG
+
+#include "Stntuple/fcl/stntuple.fcl"
+
+source.firstRun    : 1210
+source.firstSubRun :    0
+source.firstEvent  :   23
+source.maxEvents   :    1
+source.fileNames   : [ "/mu2e/data2/users/murat/datasets/mdc2020/CeEndpointMix2BBSignal/dig.mu2e.CeEndpointMix2BBSignal.MDC2020r_perfect_v1_0.001210_00000000.art" ]
+
+process_name       : TestDeltaFinder
+
+physics : {
+
+    producers : { @table::Reconstruction.producers
+
+        ComboHitFilter : { @table::CalPatRec.producers.ComboHitFilter 
+            simID      : 1255
+            debugLevel : 1
+        }
+
+        DeltaFinder: { @table::CalPatRec.producers.DeltaFinder
+            diagLevel                     : 1 ## 0 ## 
+            debugLevel                    : 1 ## 1 ##
+
+            finderParameters : { @table::CalPatRec.producers.DeltaFinder.finderParameters        
+                flagProtonHits : 1
+            }
+
+            diagPlugin : { @table::CalPatRec.producers.DeltaFinder.diagPlugin
+                printDeltaSeeds           : 1
+                printDeltaCandidates      : 1
+
+                mcDiag                    : true
+                printComboHits            : 0 ## 0 ## 
+                printGoodComboHits        : 1 ## 0 ## 
+                printElectrons            : 1 ## 0 ## 
+                printElectronsHits        : 1 ## 1 ## 
+                printElectronsMinMom      :  80.
+                printElectronsMaxMom      : 110.
+                printElectronsMinNHits    : 5   ## 30
+                printElectronsMaxFReco    : 1.1 ## 0.5
+
+                printMcProtons            : 1
+                printProtonHits           : 1
+                printProtonSeeds          : 1
+                printProtonCandidates     : 1
+            }
+        }
+    }
+
+    filters   : { @table::Reconstruction.filters   }
+    analyzers : { @table::stntuple.analyzers       
+        DeltaFinderAna: { @table::CalPatRec.analyzers.DeltaFinderAna
+            debugLevel                : 1         ## 1
+            printComboHits            : 1         ## 0 ##
+            printSingleComboHits      : 1
+            printElectrons            : 1         ## 0 ##
+            printElectronHits         : 1         ## 1 ##
+            printElectronsMinNHits    : 5         ## 30
+            printElectronsMaxFReco    : 1.1       ## 0.2 ## 0.5
+        }
+    }
+
+    p1: [ @sequence::TrkHitReco.PrepareHits,                 DeltaFinder ]
+    p3: [ @sequence::TrkHitReco.PrepareHits, ComboHitFilter, DeltaFinder ]
+
+    trigger_paths : [ @sequence::TRIGGER_PATH ]
+
+    e1            : [ DeltaFinderAna ] ## MuHitDisplay  ] # defaultOutput ]
+    end_paths     : [ e1             ]
+}
+#------------------------------------------------------------------------------
+physics.producers.makePH.StrawHitSelectionBits     : [ "TimeSelection" ] ## take out "EnergySelection"
+physics.producers.makePH.MaxDS                     : 5  ## prev: 4
+physics.producers.makePH.CheckWres                 : true
+#------------------------------------------------------------------------------
+# uncomment to write the DST out
+#------------------------------------------------------------------------------
+# physics.out : [detectorOutput]
+# outputs.detectorOutput.fileName           : "sim.murat.bbb.ccc.read_reco_stn_tcn.art"
+services.TFileService.fileName            : "deltaFinder_debug.root"
+#------------------------------------------------------------------------------
+# everything below is appended by murat/scripts/submit_mu2e_job
+#------------------------------------------------------------------------------
