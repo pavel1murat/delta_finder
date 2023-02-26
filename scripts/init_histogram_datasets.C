@@ -41,11 +41,19 @@ namespace delta_finder {
       hf = Book->NewHistFile(ds->id(),"deltaFinder_test1","" );
 //-----------------------------------------------------------------------------
 // new version, new naming conventions, more histograms...
+// r05: first version of the proton counting added
 //-----------------------------------------------------------------------------
       ds = Book->NewDataset ("cele0b2s41r03" ,"",-1,   1000000000); 
       hf = Book->NewHistFile(ds->id(),"deltaFinder_test1","" );
       hf = Book->NewHistFile(ds->id(),"deltaFinder_diag" ,"" );
       hf = Book->NewHistFile(ds->id(),"flagBkgHist_test3","" );
+
+      ds = Book->NewDataset ("cele0b2s41r0000" ,"",-1,   1000000000); 
+      hf = Book->NewHistFile(ds->id(),"deltaFinder_diag.0500","" );
+      hf = Book->NewHistFile(ds->id(),"deltaFinder_diag.0600","" );
+      hf = Book->NewHistFile(ds->id(),"flagBkgHits_diag.0600","" );
+      hf = Book->NewHistFile(ds->id(),"flagBkgHits_diag.0601","" );
+      hf = Book->NewHistFile(ds->id(),"flagBkgHits_diag.0602","" );
 //-----------------------------------------------------------------------------
 // new version, new naming conventions, more histograms...
 //-----------------------------------------------------------------------------

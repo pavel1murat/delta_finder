@@ -124,7 +124,7 @@ int TDisplayHits::readData(const char* Fn) {
   float  t, tcorr, dt, edep, wdist, wres;
   int    pdg_id, sim_id, mom_pdg, mom_id;
   float  pstart, p, pz, x , y, z;
-  int    delta_id, radOK, edepOK;
+  int    delta_id, proton_id;
 
   int color[4] = { kRed, kGreen, kBlue, kMagenta };  // rgbm
 
@@ -144,7 +144,7 @@ int TDisplayHits::readData(const char* Fn) {
       fscanf(f,"%f %f %f %f %f %f",&t,&tcorr,&dt,&edep,&wdist,&wres);
       fscanf(f,"%i %i %i %i"      ,&pdg_id,&sim_id,&mom_pdg,&mom_id);
       fscanf(f,"%f %f %f %f %f %f",&pstart,&p,&pz,&x,&y,&z);
-      fscanf(f,"%i"               ,&delta_id);
+      fscanf(f,"%i %i"            ,&delta_id,&proton_id);
 //-----------------------------------------------------------------------------
 // diagnostics
 //-----------------------------------------------------------------------------
